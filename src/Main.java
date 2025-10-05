@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
-    static int arraySize = 10000;
+    static int arraySize = 50000;
     static ArrayList<Integer> bubbleSort = new ArrayList<>((int)arraySize);
     static ArrayList<Integer> selectionArray = new ArrayList<>(bubbleSort);
     public static void main(String[] args) {
@@ -39,7 +39,29 @@ public class Main {
         double milliseconds = duration / 1_000_000.0;
         double seconds = duration /1_000_000_000.0;
         System.out.println();
-        System.out.println("Sorting an array of size " + arraySize + " took Selection Sort: ");
+        System.out.println("Sorting an array of size " + arraySize + " took Bubble Sort: ");
+        System.out.println(duration + " nanoseconds.");
+        System.out.printf("%.3f milliseconds%n", milliseconds);
+        System.out.printf("%.6f seconds%n", seconds);
+        System.out.println();
+
+        // Insertion Sort
+        ArrayList<Integer> insertionArray = new ArrayList<>(bubbleSort); // Copy original
+        timerStart = System.nanoTime();
+        for (int i = 1; i < insertionArray.size(); i++) {
+            int key = insertionArray.get(i);
+            int j = i - 1;
+            while (j >= 0 && insertionArray.get(j) > key) {
+                insertionArray.set(j + 1, insertionArray.get(j));
+                j = j - 1;
+            }
+            insertionArray.set(j + 1, key);
+        }
+        timerEnd = System.nanoTime();
+        duration = timerEnd - timerStart;
+        milliseconds = duration / 1_000_000.0;
+        seconds = duration / 1_000_000_000.0;
+        System.out.println("Sorting an array of size " + arraySize + " took Insertion Sort: ");
         System.out.println(duration + " nanoseconds.");
         System.out.printf("%.3f milliseconds%n", milliseconds);
         System.out.printf("%.6f seconds%n", seconds);
@@ -72,6 +94,10 @@ public class Main {
         System.out.printf("%.3f milliseconds%n", milliseconds);
         System.out.printf("%.6f seconds%n", seconds);
         System.out.println();
+
+        
+
+
         
     }
 
